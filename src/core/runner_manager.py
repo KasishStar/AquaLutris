@@ -1,14 +1,26 @@
 import subprocess
 
+from src.database.storage import Storage
+
 
 class RunnerManager:
     @staticmethod
     def launch(game):
 
-        runner = game.get("runner", "native")
+        settings = Storage.load_settings()
+
+        runner = game.get(
+            "runner",
+            settings.get(
+                "default_runner",
+                "native"
+            )
+        )
 
         if runner == "native":
-            subprocess.Popen([game["path"]])
+            subprocess.Popen(
+                [game["path"]]
+            )
 
         elif runner == "wine":
             subprocess.Popen(
@@ -16,4 +28,6 @@ class RunnerManager:
             )
 
         else:
-            subprocess.Popen([game["path"]])
+            subprocess.Popen(
+                [game["path"]]
+            )
