@@ -1,6 +1,6 @@
-import subprocess
 from src.database.storage import Storage
 from src.core.cover_manager import CoverManager
+from src.core.runner_manager import RunnerManager
 
 
 class GameManager:
@@ -15,7 +15,8 @@ class GameManager:
             "runner": "native",
             "cover": CoverManager.get_cover_path(name),
             "description": "",
-            "platform": "Linux"
+            "platform": "Linux",
+            "version": "Unknown"
         }
 
         self.games.append(game)
@@ -23,12 +24,21 @@ class GameManager:
 
     def toggle_favorite(self, index):
         self.games[index]["favorite"] = not self.games[index].get(
-            "favorite", False
+            "favorite",
+            False
         )
+
+        Storage.save_games(self.games)
+
+    def set_runner(self, index, runner):
+        self.games[index]["runner"] = runner
+
         Storage.save_games(self.games)
 
     def launch_game(self, index):
-        subprocess.Popen([self.games[index]["path"]])
+        RunnerManager.launch(
+            self.games[index]
+        )
 
     def reload(self):
         self.games = Storage.load_games()
