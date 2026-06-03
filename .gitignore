@@ -1,8 +1,12 @@
-**pycache**/
+__pycache__/
 *.pyc
+
 venv/
 build/
 dist/
 release/
+
 *.tar.gz
+
+.pytest_cache/
 
