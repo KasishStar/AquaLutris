@@ -32,7 +32,6 @@ class GameManager:
 
     def set_runner(self, index, runner):
         self.games[index]["runner"] = runner
-
         Storage.save_games(self.games)
 
     def launch_game(self, index):
