@@ -3,7 +3,7 @@
         "name": "Prism Launcher",
         "path": "/home/kasish/Documents/Games/PrismLauncher-Linux-x86_64.AppImage",
         "favorite": false,
-        "runner": "native",
+        "runner": "wine",
         "cover": "covers/Prism Launcher.png"
     }
 ]
